@@ -107,7 +107,7 @@ package org.qrcode
 		
 		public function toByte():Array
 		{
-			
+			var j :  int;
 			var size:int = this.size;
 			
 			if(size == 0) {
@@ -121,7 +121,7 @@ package org.qrcode
 			
 			for(var i:int=0; i<bytes; i++) {
 				var v:Number = 0x00;
-				for(var j:int=0; j<8; j++) {
+				for(j=0; j<8; j++) {
 					v = v << 1;
 					v |= this.data[p];
 					p++;
@@ -131,7 +131,7 @@ package org.qrcode
 			
 			if(size & 7) {
 				v = 0x00;
-				for(var j:int=0; j<(size & 7); j++) {
+				for(j=0; j<(size & 7); j++) {
 					v = v << 1;
 					v |= this.data[p];
 					p++;

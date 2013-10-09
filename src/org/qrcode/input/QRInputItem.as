@@ -74,6 +74,7 @@ package org.qrcode.input
 		
 		public function encodeModeAn(version:int):int
 		{
+			var val : int;
 			try {
 				var words:int = this.size / 2;
 				
@@ -83,14 +84,14 @@ package org.qrcode.input
 				bs.appendNum(QRSpecs.lengthIndicator(QRCodeEncodeType.QRCODE_ENCODE_ALPHA_NUMERIC, version), this.size);
 				
 				for(var i:int=0; i<words; i++) {
-					var val:int  = QRInput.lookAnTable(this.data[i*2].toString().charCodeAt()) * 45;
+					val  = QRInput.lookAnTable(this.data[i*2].toString().charCodeAt()) * 45;
 					val += QRInput.lookAnTable(this.data[i*2+1].toString().charCodeAt());
 					
 					bs.appendNum(11, val);
 				}
 				
 				if(this.size & 1) {
-					var val:int = QRInput.lookAnTable(this.data[words * 2].toString().charCodeAt());
+					val = QRInput.lookAnTable(this.data[words * 2].toString().charCodeAt());
 					bs.appendNum(6, val);
 				}
 				
@@ -181,7 +182,6 @@ package org.qrcode.input
 			if(version == 0) 
 				version = 1;
 			
-			var bits:int;
 			switch(this.mode) {
 				case QRCodeEncodeType.QRCODE_ENCODE_NUMERIC:
 					bits = QRInput.estimateBitsModeNum(this.size);    

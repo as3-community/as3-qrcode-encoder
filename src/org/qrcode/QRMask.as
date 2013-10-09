@@ -43,7 +43,7 @@ package org.qrcode
 				format = format >> 1;
 			}
 			
-			for(var i:int=0; i<7; i++) {
+			for( i=0; i<7; i++) {
 				if(format & 1) {
 					blacks += 2;
 					v = 0x85;
@@ -177,11 +177,12 @@ package org.qrcode
 		
 		public function evaluateSymbol(width:int,frame:Array):int
 		{
+			var x : int, y : int;
 			var head:int = 0;
 			var demerit:int = 0;
 			runLength = QRUtil.array_fill(0, QRSpecs.QRSPEC_VERSION_MAX + 1, 0x00);
 			
-			for(var y:int=0; y<width; y++) {
+			for( y=0; y<width; y++) {
 				head = 0;
 				runLength[0] = 1;
 				
@@ -191,7 +192,7 @@ package org.qrcode
 				if (y>0)
 					frameYM = frame[y-1];
 				
-				for(var x:int=0; x<width; x++) {
+				for( x=0; x<width; x++) {
 					if((x > 0) && (y > 0)) {
 						var b22:Number = frameY[x] & frameY[x-1] & frameYM[x] & frameYM[x-1];
 						var w22:Number = frameY[x] | frameY[x-1] | frameYM[x] | frameYM[x-1];
@@ -217,11 +218,11 @@ package org.qrcode
 				demerit += this.calcN1N3(head+1,runLength);
 			}
 			
-			for(var x:int=0; x<width; x++) {
+			for( x=0; x<width; x++) {
 				head = 0;
 				runLength[0] = 1;
 				
-				for(var y:int=0; y<width; y++) {
+				for( y=0; y<width; y++) {
 					if(y == 0 && (frame[y][x] & 1)) {
 						runLength[0] = -1;
 						head = 1;

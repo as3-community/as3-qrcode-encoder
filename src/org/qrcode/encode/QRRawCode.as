@@ -51,6 +51,7 @@ package org.qrcode.encode
 
 		public function init(spec:Array):int
 		{
+			var i : int;
 			var dl:int = QRSpecs.rsDataCodes1(spec);
 			var el:int = QRSpecs.rsEccCodes1(spec);
 			var rs:QRRsItem = QRUtil.initRs(8, 0x11d, 0, 1, el, 255 - dl - el);
@@ -59,7 +60,7 @@ package org.qrcode.encode
 			var dataPos:int = 0;
 			var eccPos:int = 0;
 			var blockNo:int = 0;
-			for(var i:int=0; i<QRSpecs.rsBlockNum1(spec); i++) {
+			for( i=0; i<QRSpecs.rsBlockNum1(spec); i++) {
 				var ecc:Array = this.ecccode.slice(eccPos);
 				this.rsblocks[i] = new QRRsBlock(dl, this.datacode.slice(dataPos), el,  ecc, rs);
 				ecc = rs.encode_rs_char((rsblocks[i] as QRRsBlock).data);
@@ -79,7 +80,7 @@ package org.qrcode.encode
 			
 			if(rs == null) return -1;
 			
-			for(var i:int=0; i<QRSpecs.rsBlockNum2(spec); i++) {
+			for( i=0; i<QRSpecs.rsBlockNum2(spec); i++) {
 				ecc = this.ecccode.slice(eccPos);
 				this.rsblocks.push(new QRRsBlock(dl, this.datacode.slice(dataPos), el, ecc, rs),blockNo);
 				this.ecccode = QRUtil.array_merge(this.ecccode.slice(0, eccPos), ecc);

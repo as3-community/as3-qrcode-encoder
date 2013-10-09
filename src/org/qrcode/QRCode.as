@@ -61,6 +61,9 @@ package org.qrcode
 		
 		private function encodeMask(input:QRInput,mask:int):QRCode
 		{
+			var i : int, j : int;
+			var addr : Point;
+			
 			if(input.version < 0 || input.version > QRSpecs.QRSPEC_VERSION_MAX) {
 				throw new Error('wrong version');
 			}
@@ -85,11 +88,11 @@ package org.qrcode
 			
 			 
 			// inteleaved data and ecc codes
-			for(var i:int=0; i<raw.dataLength + raw.eccLength; i++) {
+			for(i=0; i<raw.dataLength + raw.eccLength; i++) {
 				var code:int = raw.getCode();
 				var bit:int = 0x80;
-				for(var j:int=0; j<8; j++) {
-					var addr:Point = filler.next();
+				for( j=0; j<8; j++) {
+					addr = filler.next();
 					filler.setFrameAt(addr, 0x02 | int((bit & code) != 0));
 					bit = bit >> 1;
 				}
@@ -97,9 +100,9 @@ package org.qrcode
 			
 			
 			// remainder bits
-			var j:int = QRSpecs.getRemainder(version);
-			for(var i:int=0; i<j; i++) {
-				var addr:Point = filler.next();				
+			j = QRSpecs.getRemainder(version);
+			for( i=0; i<j; i++) {
+				addr = filler.next();				
 				filler.setFrameAt(addr, 0x02);
 			}
 			frame = filler.frame;

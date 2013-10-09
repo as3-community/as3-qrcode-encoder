@@ -274,16 +274,16 @@ package org.qrcode.specs
 			}
 			
 			var cx:int = alignmentPattern[version][0];
-			for(var x:int=1; x< w - 1; x++) {
+			for(x=1; x< w - 1; x++) {
 				frame = putAlignmentMarker(frame, 6, cx);
 				frame = putAlignmentMarker(frame, cx,  6);
 				cx += d;
 			}
 			
 			var cy:int = alignmentPattern[version][0];
-			for(var y:int=0; y<w-1; y++) {
+			for(y=0; y<w-1; y++) {
 				cx = alignmentPattern[version][0];
-				for(var x:int=0; x<w-1; x++) {
+				for(x=0; x<w-1; x++) {
 					frame = putAlignmentMarker(frame, cx, cy);
 					cx += d;
 				}
@@ -363,6 +363,8 @@ package org.qrcode.specs
 		
 		public static function createFrame(version:int):Array
 		{
+			var x : int, y : int;
+			
 			var width:int = getCapacity(version).width;
 			var frameLine:Array =  QRUtil.array_fill(0, width,0x00);
 			var frame:Array =  QRUtil.array_fill(0, width, frameLine);
@@ -376,7 +378,7 @@ package org.qrcode.specs
 			// Separator
 			var yOffset:int = width - 7;
 			
-			for(var y:int=0; y<7; y++,yOffset++) {
+			for(y=0; y<7; y++,yOffset++) {
 				frame[y][7] = 0xc0;
 				frame[y][width - 8] = 0xc0;
 				frame[yOffset][7] = 0xc0;
@@ -402,7 +404,7 @@ package org.qrcode.specs
 			frame = QRUtil.memset(frame, 8 ,0, 0x84, 9);
 			frame = QRUtil.memset(frame, 8 ,width-8, 0x84, 8);
 			
-			for(var y:int=0; y<8; y++,yOffset++) {
+			for(y=0; y<8; y++,yOffset++) {
 				frame[y][8] = 0x84;
 				frame[yOffset][8] = 0x84;
 			}
@@ -423,16 +425,16 @@ package org.qrcode.specs
 				
 				var v:int = vinf;
 				
-				for(var x:int=0; x<6; x++) {
-					for(var y:int=0; y<3; y++) {
+				for(x=0; x<6; x++) {
+					for(y=0; y<3; y++) {
 						frame[(width - 11)+y][x] = 0x88 | (v & 1);
 						v = v >> 1;
 					}
 				}
 				
 				v = vinf;
-				for(var y:int=0; y<6; y++) {
-					for(var x:int=0; x<3; x++) {
+				for(y=0; y<6; y++) {
+					for(x=0; x<3; x++) {
 						frame[y][x+(width - 11)] = 0x88 | (v & 1);
 						v = v >> 1;
 					}

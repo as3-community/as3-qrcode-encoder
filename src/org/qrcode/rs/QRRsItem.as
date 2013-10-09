@@ -40,6 +40,7 @@ package org.qrcode.rs
 			// Copyright 2004 Phil Karn, KA9Q
 			// May be used under the terms of the GNU Lesser General Public License (LGPL)
 			
+			var i : int;
 			var rs:QRRsItem = null;
 			
 			// Check parameter ranges
@@ -68,7 +69,7 @@ package org.qrcode.rs
 			rs.alpha_to[A0] = 0; // alpha**-inf = 0
 			var sr:int = 1;
 			
-			for(var i:int=0; i<rs.nn; i++) {
+			for(i=0; i<rs.nn; i++) {
 				rs.index_of[sr] = i;
 				rs.alpha_to[i] = sr;
 				sr <<= 1;
@@ -94,13 +95,13 @@ package org.qrcode.rs
 			
 			/* Find prim-th root of 1, used in decoding */
 			var iprim:uint;
-			for(iprim=1;(iprim % prim) != 0;iprim += rs.nn)
+			for(iprim=1;(iprim % prim) != 0;iprim += rs.nn){}
 				; // intentional empty-body loop!
 			
 			rs.iprim = int(iprim / prim);
 			rs.genpoly[0] = 1;
-			
-			for (var i:int = 0,root=fcr*prim; i < nroots; i++, root += prim) {
+			var root : Number = fcr*prim;
+			for (i = 0; i < nroots; i++, root += prim) {
 				rs.genpoly[i+1] = 1;
 				
 				// Multiply rs.genpoly[] by  @**(root + x)
@@ -116,7 +117,7 @@ package org.qrcode.rs
 			}
 			
 			// convert rs.genpoly[] to index form for quicker encoding
-			for (var i:int = 0; i <= nroots; i++)
+			for (i = 0; i <= nroots; i++)
 				rs.genpoly[i] = rs.index_of[rs.genpoly[i]];
 			
 			return rs;

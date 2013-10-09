@@ -63,7 +63,7 @@ package org.qrcode
 		public function eatNum():int
 		{
 			var ln:int = QRSpecs.lengthIndicator(QRCodeEncodeType.QRCODE_ENCODE_NUMERIC, this.input.version);
-			
+			var dif : int;
 			var p:int = 0;
 			while(isdigitat(this.dataStr, p)) {
 				p++;
@@ -73,7 +73,7 @@ package org.qrcode
 			var mode:int = this.identifyMode(p);
 			
 			if(mode == QRCodeEncodeType.QRCODE_ENCODE_BYTES) {
-				var dif:int = QRInput.estimateBitsModeNum(run) + 4 + ln
+				dif = QRInput.estimateBitsModeNum(run) + 4 + ln
 					+ QRInput.estimateBitsMode8(1)         // + 4 + l8
 					- QRInput.estimateBitsMode8(run + 1); // - 4 - l8
 				if(dif > 0) {
@@ -81,7 +81,7 @@ package org.qrcode
 				}
 			}
 			if(mode == QRCodeEncodeType.QRCODE_ENCODE_ALPHA_NUMERIC) {
-				var dif:int = QRInput.estimateBitsModeNum(run) + 4 + ln
+				dif = QRInput.estimateBitsModeNum(run) + 4 + ln
 					+ QRInput.estimateBitsModeAn(1)        // + 4 + la
 					- QRInput.estimateBitsModeAn(run + 1);// - 4 - la
 				if(dif > 0) {
@@ -102,7 +102,7 @@ package org.qrcode
 			var ln:int = QRSpecs.lengthIndicator(QRCodeEncodeType.QRCODE_ENCODE_NUMERIC, this.input.version);
 			
 			var p:int = 0;
-			
+			var dif : int;
 			while(isalnumat(this.dataStr, p)) {
 				if(isdigitat(this.dataStr, p)) {
 					var q:int = p;
@@ -110,7 +110,7 @@ package org.qrcode
 						q++;
 					}
 					
-					var dif:int = QRInput.estimateBitsModeAn(p) // + 4 + la
+					dif = QRInput.estimateBitsModeAn(p) // + 4 + la
 						+ QRInput.estimateBitsModeNum(q - p) + 4 + ln
 						- QRInput.estimateBitsModeAn(q); // - 4 - la
 					
@@ -127,7 +127,7 @@ package org.qrcode
 			var run:int = p;
 			
 			if(!isalnumat(this.dataStr, p)) {
-				var dif:int = QRInput.estimateBitsModeAn(run) + 4 + la
+				dif = QRInput.estimateBitsModeAn(run) + 4 + la
 					+ QRInput.estimateBitsMode8(1) // + 4 + l8
 					- QRInput.estimateBitsMode8(run + 1); // - 4 - l8
 				if(dif > 0) {
@@ -163,6 +163,7 @@ package org.qrcode
 			var la:int = QRSpecs.lengthIndicator(QRCodeEncodeType.QRCODE_ENCODE_ALPHA_NUMERIC, this.input.version);
 			var ln:int = QRSpecs.lengthIndicator(QRCodeEncodeType.QRCODE_ENCODE_NUMERIC, this.input.version);
 			
+			var q : int ,dif : int;
 			var p:int = 1;
 			var dataStrLen:int = this.dataStr.length;
 			
@@ -173,11 +174,11 @@ package org.qrcode
 					break;
 				}
 				if(mode == QRCodeEncodeType.QRCODE_ENCODE_NUMERIC) {
-					var q:int = p;
+					q = p;
 					while(isdigitat(this.dataStr, q)) {
 						q++;
 					}
-					var dif:int = QRInput.estimateBitsMode8(p) // + 4 + l8
+					dif = QRInput.estimateBitsMode8(p) // + 4 + l8
 						+ QRInput.estimateBitsModeNum(q - p) + 4 + ln
 						- QRInput.estimateBitsMode8(q); // - 4 - l8
 					if(dif < 0) {
@@ -186,11 +187,11 @@ package org.qrcode
 						p = q;
 					}
 				} else if(mode == QRCodeEncodeType.QRCODE_ENCODE_ALPHA_NUMERIC) {
-					var q:int = p;
+					q = p;
 					while(isalnumat(this.dataStr, q)) {
 						q++;
 					}
-					var dif:int = QRInput.estimateBitsMode8(p)  // + 4 + l8
+					dif = QRInput.estimateBitsMode8(p)  // + 4 + l8
 						+ QRInput.estimateBitsModeAn(q - p) + 4 + la
 						- QRInput.estimateBitsMode8(q); // - 4 - l8
 					if(dif < 0) {
