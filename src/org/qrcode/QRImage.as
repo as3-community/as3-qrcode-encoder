@@ -1,12 +1,8 @@
-package org.qrcode
-{
-	import flash.display.Bitmap;
+package org.qrcode {
+
 	import flash.display.BitmapData;
 	import flash.geom.Matrix;
-	import flash.geom.Rectangle;
 	
-	import spark.primitives.Rect;
-	import spark.utils.BitmapUtil;
 
 	public class QRImage
 	{	

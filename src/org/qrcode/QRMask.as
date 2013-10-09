@@ -65,7 +65,7 @@ package org.qrcode
 		}
 		
 		public function mask0(x:Number, y:Number):int { return int( ( (x + y) & 1) == 0 );                       }
-		public function mask1(x:Number, y:Number):int { return int(y&1 == 0);                          }
+		public function mask1(x:Number, y:Number):int { return int((y&1) == 0);                          }
 		public function mask2(x:Number, y:Number):int { return int((x % 3) == 0);                          }
 		public function mask3(x:Number, y:Number):int { return int((x+y)%3 == 0);                       }
 		public function mask4(x:Number, y:Number):int { return int( ( (int(y*0.5) + int(x/3)) &1) == 0 )}
