@@ -42,7 +42,6 @@ package org.qrcode.encode
 			var ret:int = this.init(spec);
 			if(ret < 0) {
 				throw new Error('block alloc error');
-				return null;
 			}
 			
 			this.count = 0;

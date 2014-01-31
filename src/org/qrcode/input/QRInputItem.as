@@ -27,7 +27,6 @@ package org.qrcode.input
 			
 			if(!QRInput.check(mode, size, setData)) {
 				throw new Error('Error m:'+mode+',s:'+size+',d:'+setData.join(','));
-				return null;
 			}
 			
 			this.mode = mode;

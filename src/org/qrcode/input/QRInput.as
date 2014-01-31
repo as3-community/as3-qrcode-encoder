@@ -17,7 +17,6 @@ package org.qrcode.input
 		{
 			if (qrversion < 0 || qrversion > QRSpecs.QRSPEC_VERSION_MAX || qrlevel > QRCodeErrorLevel.QRCODE_ERROR_LEVEL_HIGH) {
 				throw new Error('Invalid version no');
-				return null;
 			}
 			this.items = [];
 			this._version = qrversion;
