@@ -33,6 +33,10 @@
     <!-- ########################## SETTINGS ############################### -->
     <!-- ################################################################### -->
     <property environment="env" />
+    <!-- CLEAN -->    
+    <target name="clean" description="Clean the project">
+        <delete dir="build"/>
+    </target>
     <!-- BUILD -->    
     <target name="build" description="Builds the project">
         <java classname="com.adobe.flash.compiler.clients.COMPC" fork="true" failonerror="true" dir="${basedir}" maxmemory="1024m">
