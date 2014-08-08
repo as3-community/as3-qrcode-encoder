@@ -65,4 +65,3 @@ before_script:
 
 script:
     - ant
-    - gradle
