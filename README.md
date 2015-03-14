@@ -1,4 +1,4 @@
-AS3 QR ENCODER [![Build Status](https://travis-ci.org/as3-community/as3-qrcode-encoder.svg?branch=master)](https://travis-ci.org/as3-community/as3-qrcode-encoder)
+AS3 QR ENCODER [![Build Status](https://travis-ci.org/vpmedia/as3-qrcode-encoder.svg?branch=master)](https://travis-ci.org/vpmedia/as3-qrcode-encoder)
 ==============
 
 AS3 QR Code encoder is an adaptation of qrencode open source C library to as3 language. This library allow you to generate a qr code from your application (Flex, Flash, AIR) on offline mode.
@@ -14,6 +14,17 @@ The choice to just provide a bitmap data object has been made to allow you to di
 
 A flash demo:
 
-import flash.display.Sprite;import org.qrcode.QRCode;import flash.display.Bitmap;var sp:Sprite = new Sprite();var qr:QRCode = new QRCode();qr.encode("TEST");var img:Bitmap = new Bitmap(qr.bitmapData);sp.addChild(img);addChild(sp);
+import flash.display.Sprite;
+import org.qrcode.QRCode;
+import flash.display.Bitmap;
+
+var sp:Sprite = new Sprite();
+var qr:QRCode = new QRCode();
+qr.encode("TEST");
+var img:Bitmap = new Bitmap(qr.bitmapData);
+
+sp.addChild(img);
+
+addChild(sp);
 
 The project is under MIT License. 
